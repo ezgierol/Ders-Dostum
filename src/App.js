@@ -20,29 +20,40 @@ export default function app() {
         3. Aynı kalıp sonraki tıklamalar için de tekrarlanmalıdır, böylece kullanıcı kartı istediği kadar ileri geri çevirmeye devam edebilir. 
 */
 
+  const handleClick = () => {
+    setFlashCard({ ...flashCard, flipped: !flashCard.flipped })
+  }
+  // mevcut flashCard nesnesindeki flipped anahtarının değerini tersler.
+  // const handleClick = () => {
+  //   setFlashCard({ flipped: !flashCard.flipped, ...flashCard })
+  // }
+
   return (
     <div>
       <header>
-        <img src='./images/react.svg' />
+        <img src="./images/react.svg" />
         <h1> React Çalışma Arkadaşı </h1>
       </header>
 
       {/*-------Aşağıdaki div'i düzenleyin------------*/}
 
-      <div className='flash-card'>
+      <div
+        className={`flash-card ${flashCard.flipped ? 'flash-card' : 'flipped'}`}
+        onClick={handleClick}
+      >
         {/*-------Yukarıdaki div'i düzenleyin------------*/}
 
-        <div className='flash-card-inner'>
-          <div className='flash-card-front'>
-            <p className='question'>{flashCard.question}</p>
-            <ol type='a'>
+        <div className="flash-card-inner">
+          <div className="flash-card-front">
+            <p className="question">{flashCard.question}</p>
+            <ol type="a">
               {flashCard.choices.map((choice) => (
                 <li key={crypto.randomUUID()}>{choice}</li>
               ))}
             </ol>
           </div>
-          <div className='flash-card-back'>
-            <p className='answer'>{flashCard.answer}</p>
+          <div className="flash-card-back">
+            <p className="answer">{flashCard.answer}</p>
             <p>{flashCard.explanation}</p>
           </div>
         </div>
